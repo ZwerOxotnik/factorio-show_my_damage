@@ -6,7 +6,7 @@
 	"author": "ZwerOxotnik",
 	"contact": "zweroxotnik@gmail.com, Discord:ZwerOxotnik#7117",
 	"homepage": "reddit.com/r/ZwerOxotnik/",
-	"description": "Highly customizable, optimized mod.\nEach damage will be represented by floating numbers.\nNew features will be added as more people will download this mod",
+	"description": "See locale/*",
 	"dependencies": [
 		"? switchable_mods",
 		"? zk-lib >= 0.10.0"
