@@ -1,6 +1,12 @@
 ---@type table<string, module>
 local modules = {}
-modules.show_my_damage = require("models/show_my_damage")
+
+local SMD_mode = settings.startup["SMD_mode"].value
+if SMD_mode == "fancy_text" then
+	modules.show_my_damage = require("models/SMD_fancy_text")
+elseif SMD_mode == "simple_floating_text" then
+	modules.show_my_damage = require("models/SMD_simple_floating_text")
+end
 
 
 -- Safe disabling of this mod remotely on init stage

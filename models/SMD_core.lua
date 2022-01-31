@@ -3,24 +3,7 @@
 local M = {}
 
 
---#region Constants
-local tostring = tostring
-local ceil = math.ceil
-local random = math.random
-local WHITE_COLOR = {1, 1, 1}
-local YELLOW_COLOR = {1, 1, 0}
-local RED_COLOR = {1, 0, 0}
-local TEXT_POSITION = {0, 0}
-local TEXT_DATA = {
-	name = "flying-text",
-	text = '',
-	position = TEXT_POSITION,
-	color = WHITE_COLOR
-}
---#endregion
-
-
-local function set_filters()
+M.set_filters = function()
 	local filters = {
 		{
 			filter = "final-damage-amount", comparison = ">",
@@ -63,29 +46,9 @@ end
 
 --#region Functions of events
 
-local function on_entity_damaged(event)
-	local entity = event.entity
-	if not (entity and entity.valid) then return end
-	local damage = ceil(event.final_damage_amount)
-	TEXT_DATA.text = tostring(damage)
-	local ent_pos = entity.position
-	TEXT_POSITION[1] = ent_pos.x + random() - 0.5
-	TEXT_POSITION[2] = ent_pos.y + random() - 0.5
-	if damage > 50 then
-		if damage > 200 then
-			TEXT_DATA.color = RED_COLOR
-		else
-			TEXT_DATA.color = YELLOW_COLOR
-		end
-	else
-		TEXT_DATA.color = WHITE_COLOR
-	end
-	entity.surface.create_entity(TEXT_DATA)
-end
-
-local function on_runtime_mod_setting_changed(event)
+M.on_runtime_mod_setting_changed = function(event)
 	if string.sub(event.setting, 0, 4) == "SMD_" then
-		set_filters()
+		M.set_filters()
 	end
 end
 
@@ -94,27 +57,13 @@ end
 
 --#region Pre-game stage
 
-local function add_remote_interface()
+M.add_remote_interface = function()
 	-- https://lua-api.factorio.com/latest/LuaRemote.html
 	remote.remove_interface("show_my_damage") -- For safety
 	remote.add_interface("show_my_damage", {})
 end
 
-
-M.on_init = set_filters
-M.on_configuration_changed = set_filters
-M.on_load = set_filters
-M.add_remote_interface = add_remote_interface
-M.on_mod_enabled = set_filters
--- M.on_mod_disabled = set_filters
-
 --#endregion
-
-
-M.events = {
-	[defines.events.on_entity_damaged] = on_entity_damaged,
-	[defines.events.on_runtime_mod_setting_changed] = on_runtime_mod_setting_changed
-}
 
 
 return M

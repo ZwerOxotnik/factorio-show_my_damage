@@ -2,8 +2,14 @@
 
 
 -- https://wiki.factorio.com/Tutorial:Mod_settings#Creation
--- {"enabled", "disabled"}
 data:extend({
+	{
+			type = "string-setting",
+			name = "SMD_mode",
+			setting_type = "startup",
+			allowed_values = {"fancy_text", "simple_floating_text"},
+			default_value = "fancy_text",
+	},
 	{
 			type = "int-setting",
 			name = "SMD_minimum_damage",
