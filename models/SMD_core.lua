@@ -3,6 +3,9 @@
 local M = {}
 
 
+local sub = string.sub
+
+
 M.set_filters = function()
 	local filters = {
 		{
@@ -47,7 +50,7 @@ end
 --#region Functions of events
 
 M.on_runtime_mod_setting_changed = function(event)
-	if string.sub(event.setting, 0, 4) == "SMD_" then
+	if sub(event.setting, 0, 4) == "SMD_" then
 		M.set_filters()
 	end
 end
