@@ -6,7 +6,7 @@
 	"author": "ZwerOxotnik",
 	"contact": "zweroxotnik@gmail.com, Discord:ZwerOxotnik",
 	"homepage": "reddit.com/r/ZwerOxotnik/",
-	"description": "See locale/*",
+	"description": "See locale/* ",
 	"dependencies": [
 		"? switchable_mods",
 		"? zk-lib >= 0.10.0"
