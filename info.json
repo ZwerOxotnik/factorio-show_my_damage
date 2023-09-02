@@ -1,10 +1,10 @@
 {
 	"name": "show_my_damage",
-	"version": "0.6.2",
+	"version": "0.6.3",
 	"factorio_version": "1.1",
 	"title": "Show my damage",
 	"author": "ZwerOxotnik",
-	"contact": "zweroxotnik@gmail.com, Discord:ZwerOxotnik#7117",
+	"contact": "zweroxotnik@gmail.com, Discord:ZwerOxotnik",
 	"homepage": "reddit.com/r/ZwerOxotnik/",
 	"description": "See locale/*",
 	"dependencies": [
