@@ -14,16 +14,15 @@ local draw_text = rendering.draw_text
 local WHITE_COLOR = {1, 1, 1}
 local YELLOW_COLOR = {1, 1, 0}
 local RED_COLOR = {1, 0, 0}
-local TEXT_OFFSET = {0, 0}
-local TEXT_DATA = {
+local __TEXT_OFFSET = {0, 0}
+local __TEXT_DATA = {
 	name = "flying-text",
 	text = '',
-	target = nil,
+	target = {entity = nil, offset = __TEXT_OFFSET},
 	surface = nil,
 	scale = 1,
 	time_to_live = 15,
 	color = WHITE_COLOR,
-	target_offset = TEXT_OFFSET,
 	only_in_alt_mode = true
 }
 --#endregion
@@ -35,36 +34,36 @@ local function on_entity_damaged(event)
 	local entity = event.entity
 	if not (entity and entity.valid) then return end
 
-	TEXT_DATA.target = entity
-	TEXT_DATA.surface = entity.surface
+	__TEXT_DATA.target.entity = entity
+	__TEXT_DATA.surface = entity.surface
 
 	local damage = ceil(event.final_damage_amount)
-	TEXT_DATA.text = tostring(damage)
+	__TEXT_DATA.text = tostring(damage)
 	if damage > 30 then
 		local scale = 1.5
 		if damage > 100 then
 			scale = damage / 50
 			if scale > 2.5 then
-				TEXT_DATA.scale = 2.5
+				__TEXT_DATA.scale = 2.5
 			else
-				TEXT_DATA.scale = scale
+				__TEXT_DATA.scale = scale
 			end
-			TEXT_DATA.time_to_live = 60
-			TEXT_DATA.color = RED_COLOR
+			__TEXT_DATA.time_to_live = 60
+			__TEXT_DATA.color = RED_COLOR
 		else
-			TEXT_DATA.scale = scale
-			TEXT_DATA.time_to_live = 40
-			TEXT_DATA.color = YELLOW_COLOR
+			__TEXT_DATA.scale = scale
+			__TEXT_DATA.time_to_live = 40
+			__TEXT_DATA.color = YELLOW_COLOR
 		end
 	else
-		TEXT_DATA.scale = 1
-		TEXT_DATA.time_to_live = 20
-		TEXT_DATA.color = WHITE_COLOR
+		__TEXT_DATA.scale = 1
+		__TEXT_DATA.time_to_live = 20
+		__TEXT_DATA.color = WHITE_COLOR
 	end
-	TEXT_OFFSET[1] = random() * 1.5 - 0.75
-	TEXT_OFFSET[2] = random() * 1.5 - 0.75
+	__TEXT_OFFSET[1] = random() * 1.5 - 0.75
+	__TEXT_OFFSET[2] = random() * 1.5 - 0.75
 
-	draw_text(TEXT_DATA)
+	draw_text(__TEXT_DATA)
 end
 
 --#endregion
